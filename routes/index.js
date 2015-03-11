@@ -67,7 +67,7 @@ router.post('/generate-email', function(req, res, next){
   var html = req.body.code;
   console.log(html);
   var options = {
-                  filename: './app/public/tmp/pdf/' + req.body.filename + '.pdf',
+                  filename: './public/tmp/pdf/' + req.body.filename + '.pdf',
                   format: 'Letter',
                   type: 'pdf',
                   height: '4in',

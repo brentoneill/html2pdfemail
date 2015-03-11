@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <form class="" action="/generate-email" method="post">
+      <input type="text" name="filename" placeholder="Title of PDF document"></input>
+      <br/>
+      <br/>
+      <textarea rows="10" cols="40" name="code"></textarea>
+      <br/>
+      <br />
+      <input type="text" name="email" placeholder="Email Address to send to">
+      <br/>
+      <br />
+      <input type="text" name="subject" placeholder="Subject of email...">
+      <br />
+      <br />
+      <button name="button" type="submit">Submit</button>
+    </form>
+  </body>
+</html>

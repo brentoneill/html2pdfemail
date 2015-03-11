@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
+
+//Mail Sending Module
 var sendgrid  = require('sendgrid')('brentoneill', 'colby0220');
 
+//PDF conversion, writing Modules
 var fs = require('fs');
 var pdf = require('html-pdf');
 
@@ -84,7 +87,7 @@ router.post('/generate-email', function(req, res, next){
       {
         filename:     req.body.filename + '.pdf',           // required only if file.content is used.
         contentType: '.pdf',
-        url:         'http://localhost:9000/tmp/pdf/' + req.body.filename + '.pdf',
+        url:         'https://html2pdf2email.herokuapp.com/tmp/pdf/' + req.body.filename + '.pdf',
         content:      ('This is the content' | Buffer)
       }
     ],

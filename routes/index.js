@@ -87,7 +87,7 @@ router.post('/generate-email', function(req, res, next){
       {
         filename:     req.body.filename + '.pdf',           // required only if file.content is used.
         contentType: '.pdf',
-        url:         'https://html2pdf2email.herokuapp.com/tmp/pdf/' + req.body.filename + '.pdf',
+        url:         'https://html2pdf2email.herokuapp.com/app/public/tmp/pdf/' + req.body.filename + '.pdf',
         content:      ('This is the content' | Buffer)
       }
     ],

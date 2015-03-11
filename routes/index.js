@@ -53,9 +53,9 @@ router.get('/', function(req, res, next) {
 //   });
 // });
 //
-// router.get('/generate', function(req, res, next) {
-//   res.render('generate', { title: 'Generate and Send email' });
-// });
+router.get('/generate', function(req, res, next) {
+  res.render('generate', { title: 'Generate and Send email' });
+});
 
 
 

@@ -8,6 +8,7 @@ var sendgrid  = require('sendgrid')('brentoneill', 'colby0220');
 var fs = require('fs');
 var pdf = require('html-pdf');
 
+//ASYNC Module sans callbacks
 
 
 /* GET home page. */
@@ -65,7 +66,6 @@ router.get('/generate', function(req, res, next) {
 router.post('/generate-email', function(req, res, next){
 
   var html = req.body.code;
-  console.log(html);
   var options = {
                   filename: './public/tmp/pdf/' + req.body.filename + '.pdf',
                   format: 'Letter',
@@ -73,30 +73,32 @@ router.post('/generate-email', function(req, res, next){
                   height: '4in',
                   width: '2in'
                 };
+
+
   pdf.create(html, options).toFile(function(err, res) {
     if (err) return console.log(err);
     console.log(res); // { filename: '/tmp/html-pdf-8ymPV.pdf' }
   });
-
-  sendgrid.send({
-    to:       req.body.email,
-    from:     'no-reply@brentocreates.com',
-    subject:  req.body.subject,
-    text:     'Testing, testing, 1-2-3. TESTING.',
-    files: [
-      {
-        filename:     req.body.filename + '.pdf',           // required only if file.content is used.
-        contentType: '.pdf',
-        url:         'https://html2pdf2email.herokuapp.com/app/public/tmp/pdf/' + req.body.filename + '.pdf',
-        content:      ('This is the content' | Buffer)
-      }
-    ],
-  }, function(err, json) {
-    if (err) { return res.send(err); }
-    console.log('sent file via email');
-    res.send('WOOHOOO')
-  });
-
+  setTimeout(function(){
+    sendgrid.send({
+      to:       req.body.email,
+      from:     'no-reply@brentocreates.com',
+      subject:  req.body.subject,
+      text:     'Testing, testing, 1-2-3. TESTING.',
+      files: [
+        {
+          filename:     req.body.filename + '.pdf',
+          contentType: '.pdf',
+          url:         'http://localhost:9000/tmp/pdf/' + req.body.filename + '.pdf',
+          content:      ('This is the content' | Buffer)
+        }
+      ],
+    }, function(err, json) {
+      if (err) { return res.send(err); }
+      console.log('sent file via email');
+      res.send('WOOHOOO')
+    });
+  }, 1500);
 
 });
 
